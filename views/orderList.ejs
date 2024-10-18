@@ -1,0 +1,41 @@
+<!-- views/orderList.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Pedidos</title>
+</head>
+<body>
+    <h1>Lista de Pedidos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre del Cliente</th>
+                <th>Correo Electrónico</th>
+                <th>Detalles del Producto</th>
+                <th>Personalización</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% orders.forEach(order => { %>
+                <tr>
+                    <td><%= order.customerName %></td>
+                    <td><%= order.email %></td>
+                    <td><%= order.productDetails %></td>
+                    <td><%= order.customization %></td>
+                    <td><%= order.status %></td>
+                    <td>
+                        <% if (order.status === 'Pendiente') { %>
+                            <form action="/orders/attend/<%= order._id %>" method="POST">
+                                <button type="submit">Marcar como Atendido</button>
+                            </form>
+                        <% } %>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

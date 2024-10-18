@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Panel de Administración</h1>
+
+    <% if (success_msg) { %>
+        <p style="color: green;"><%= success_msg %></p>
+    <% } %>
+    <% if (error_msg) { %>
+        <p style="color: red;"><%= error_msg %></p>
+    <% } %>
+
+    <h2>Total de usuarios: <%= totalUsers %></h2>
+    <h3>Último usuario registrado: <%= lastUser.username %></h3>
+
+    <h2>Lista de Usuarios</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre de usuario</th>
+                <th>Eliminar</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.username %></td>
+                    <td><a href="/admin/delete/<%= user._id %>">Eliminar</a></td>
+                    <td><a href="/admin/edit/<%= user._id %>">Editar</a></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+</body>
+</html>
